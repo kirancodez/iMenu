@@ -7,7 +7,8 @@ var cookieParser = require('cookie-parser');
 var cors = require('cors');
 
 // Routes
-const authRoute =require("./routes/auth")
+const authRoute =require("./routes/auth");
+const userRoute =require("./routes/user");
 
 // Middlewares
 app.use(bodyParser.json());
@@ -18,6 +19,7 @@ app.use(cors());
 
 // My Routes
 app.use("/api", authRoute);
+app.use("/api", userRoute);
 
 
 // Conecting  DB

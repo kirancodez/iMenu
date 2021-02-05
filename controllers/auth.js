@@ -47,9 +47,9 @@ exports.signin =(req, res) => {
 }
 
 exports.isSignedIn = expressJwt({ 
-    secret: process.env.PORT,
+    secret: process.env.SECRET,
     userProperty: "auth",
-    algorithms: ['RS256'],
+    algorithms: ['HS256'],
 })
 
 exports.isAuhendicated = (req, res, next) => {
@@ -63,18 +63,18 @@ exports.isAuhendicated = (req, res, next) => {
 }
 
 exports.isAdmin = (req, res, next) => {
-    if(!req.profile.role == "1"){
-        return res.status(400).json({
-            error: "Entry denide"
-        })
-    }
-    next();
+   if(req.profile.role !== "1"){
+       return res.status(400).json({
+           error: "ACCESS DENIED"
+       })
+   }
+   next();
 }
 
 exports.isChef = (req, res, next) => {
-    if(!req.profile.role == "2"){
-        return res.ststus(400).json({
-            error: "Entry denide"
+    if(req.profile.role !== "2"){
+        return res.status(400).json({
+            error: "ACCESS DENIED"
         })
     }
     next();
